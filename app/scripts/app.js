@@ -10,19 +10,19 @@
  */
 var myApp = angular.module('exampleApp', []);
 
-myApp.controller('dayCtrl', function($scope) {
-  var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  $scope.day = dayNames[new Date().getDay()];
+myApp.controller('dayCtrl', function($scope, days) {
+  $scope.day = days.today;
 });
 
-myApp.controller("tomorrowCtrl", function ($scope) {
-  var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  $scope.day = dayNames[(new Date().getDay() + 1) % 7];
+myApp.controller("tomorrowCtrl", function ($scope, days) {
+  $scope.day = days.tomorrow;
 });
 
-myApp.directive('highlight', function() {
+myApp.directive('highlight', function($filter) {
+  var dayFilter = $filter('dayName');
+
   return function(scope, element, attrs) {
-    if (scope.day == attrs['highlight']) {
+    if (dayFilter(scope.day) == attrs['highlight']) {
       element.css('color', 'red');
     }
   }
@@ -34,3 +34,11 @@ myApp.filter('dayName', function() {
     return angular.isNumber(input) ? dayNames[input] : input;
   }
 });
+
+var now = new Date();
+myApp.value("nowValue", now);
+
+myApp.service('days', function(nowValue) {
+  this.today = nowValue.getDay();
+  this.tomorrow = this.today + 1;
+})
