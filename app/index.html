@@ -21,12 +21,27 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="panel">
-      <div class="page-header">
-        <h3>AngularJS App</h3>
+    <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+      <h3 class="panel-header">To Do List</h3>
+      <div>There are {{todos.length}} items</div>
+      <div class="well">
+        <div>The first item is: {{todos[0].action}}</div>
       </div>
-      <h4 ng-controller="dayCtrl" highlight="Tuesday">Today is {{day || "(unknown)"  | dayName}}</h4>
-      <h4 ng-controller="tomorrowCtrl">Tomorrow is {{day || "(unknown" | dayName}}</h4>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Action</th>
+          <th>Done</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in todos">
+            <td ng-repeat="(key, value) in item">
+          {{key}}={{value}}
+          </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
 
