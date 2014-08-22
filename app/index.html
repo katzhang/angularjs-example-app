@@ -23,25 +23,26 @@
     <!-- Add your site or application content here -->
     <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
       <h3 class="panel-header">To Do List</h3>
-      <div>There are {{todos.length}} items</div>
-      <div class="well">
-        <div>The first item is: {{todos[0].action}}</div>
+      <div class="checkbox well">
+        <label>
+          <input type="checkbox" ng-model="todos[2].complete" />
+          Item 3 is complete
+        </label>
       </div>
       <table class="table">
         <thead>
-        <tr>
-          <th>Action</th>
-          <th>Done</th>
-        </tr>
+          <tr><th>#</th><th>Action</th><th>Done</th></tr>
         </thead>
-        <tbody>
           <tr ng-repeat="item in todos">
-            <td ng-repeat="(key, value) in item">
-          {{key}}={{value}}
-          </td>
+            <td>{{$index + 1}}</td>
+            <td>{{item.action}}</td>
+            <td>
+              <span ng-hide="item.complete">(Incomplete)</span>
+              <span ng-show="item.complete">(Done)</span>
+            </td>
           </tr>
-        </tbody>
       </table>
+
     </div>
 
 
