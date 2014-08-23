@@ -18,4 +18,11 @@ angular.module('exampleApp', [])
       {action: 'Buy flowers', complete: false},
       {action: 'Call family', complete: false}
     ]
+
+    $scope.buttonNames = ["Red", "Green", "Blue"];
+
+    $scope.settings = {
+      Rows: "Red",
+      Columns: "Green"
+    }
   })
