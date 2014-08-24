@@ -21,8 +21,13 @@ angular.module('exampleApp', [])
 
     $scope.buttonNames = ["Red", "Green", "Blue"];
 
-    $scope.settings = {
-      Rows: "Red",
-      Columns: "Green"
+    $scope.data = {
+      rowColor: "Blue",
+      columnColor: "Green"
+    };
+
+    $scope.handleEvent = function (e) {
+      console.log('event type: ' + e.type);
+      $scope.data.columnColor = e.type == "mouseenter" ? "Green" : "Blue";
     }
   })
