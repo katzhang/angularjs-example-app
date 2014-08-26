@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" ng-app="exampleApp">
   <head>
     <meta charset="utf-8">
     <title></title>
@@ -15,39 +15,15 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <style>
-      .Red { background-color: lightcoral; }
-      .Green { background-color: lightgreen;}
-      .Blue { background-color: lightblue; }
     </style>
   </head>
-  <body ng-app="exampleApp">
+  <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
-      <h3 class="panel-header">To Do List</h3>
-<div class="well">
-<span ng-repeat="button in buttonNames">
-<button class="btn btn-info" ng-click="data.rowColor = button">
-{{button}}
-</button>
-</span>
-</div>
-<table class="table">
-<thead>
-<tr><th>#</th><th>Action</th><th>Done</th></tr>
-</thead>
-<tr ng-repeat="item in todos" ng-class="data.rowColor"
-ng-mouseenter="handleEvent($event)"
-ng-mouseleave="handleEvent($event)">
-<td>{{$index + 1}}</td>
-<td>{{item.action}}</td>
-<td ng-class="data.columnColor">{{item.complete}}</td>
-</tr>
-</table>
-
+    <div class="well" ng-controller="simpleCtrl">
+      Content will go here
     </div>
 
 

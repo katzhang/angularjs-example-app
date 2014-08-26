@@ -9,25 +9,27 @@
  * Main module of the application.
  */
 angular.module('exampleApp', [])
-  .controller('defaultCtrl', function ($scope) {
-
-    $scope.todos = [
-      {action: 'Get groceries', complete: false},
-      {action: 'Call plumber', complete: false},
-      {action: 'Buy running shoes', complete: true},
-      {action: 'Buy flowers', complete: false},
-      {action: 'Call family', complete: false}
-    ]
-
-    $scope.buttonNames = ["Red", "Green", "Blue"];
-
-    $scope.data = {
-      rowColor: "Blue",
-      columnColor: "Green"
-    };
-
-    $scope.handleEvent = function (e) {
-      console.log('event type: ' + e.type);
-      $scope.data.columnColor = e.type == "mouseenter" ? "Green" : "Blue";
+  .service("ZipCodes", function($rootscope) {
+    return {
+      setZipCode: function(type, zip) {
+        this[type] = zip;
+        $rootscope.$broadcast("zipCodeUpdated", {
+          type: type, zipCode: zip
+        })
+      }
     }
   })
+  .controller("simpleCtrl", function ($scope, ZipCodes) {
+    $scope.$on("zipCodeUpdated", function (event, args) {
+      $scope[args.type] = args.zipCode;
+    });
+
+    $scope.setAddress = function (type, zip) {
+      ZipCodes.setZipCode(type, zip);
+      console.log("Type: " + type, zip);
+    }
+
+    $scope.copyAdress = function () {
+      $scope.zip = $scope.billingZip;
+    }
+  });
