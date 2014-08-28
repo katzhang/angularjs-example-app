@@ -17,48 +17,37 @@
     <style>
     </style>
   </head>
-  <body ng-controller="topLevelCtrl">
+  <body ng-controller="defaultCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
-<div class="well">
-<h4>Top Level Controller</h4>
-<div class="input-group">
-<span class="input-group-btn">
-<button class="btn btn-default" type="button"
-ng-click="reverseText()">Reverse</button>
-<button class="btn btn-default" type="button"
-ng-click="changeCase()">Case</button>
-</span>
-<input class="form-control" ng-model="data.dataValue">
-</div>
-</div>
-<div class="well" ng-controller="firstChildCtrl">
-<h4>First Child Controller</h4>
-<div class="input-group">
-<span class="input-group-btn">
-<button class="btn btn-default" type="button"
-ng-click="reverseText()">Reverse</button>
-<button class="btn btn-default" type="button"
-ng-click="changeCase()">Case</button>
-</span>
-<input class="form-control" ng-model="data.dataValue">
-</div>
-</div>
-<div class="well" ng-controller="secondChildCtrl">
-<h4>Second Child Controller</h4>
-<div class="input-group">
-<span class="input-group-btn">
-<button class="btn btn-default" type="button"
-ng-click="reverseText()">Reverse</button>
-<button class="btn btn-default" type="button"
-ng-click="changeCase()">Case</button>
-<button class="btn btn-default" type="button"
-ng-click="shiftFour()">Shift</button>
-</span>
-<input class="form-control" ng-model="data.dataValue">
-</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>
+            Products
+            <span class="label label-primary">{{products.length}}</span>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Category</td>
+                    <td>Expiry</td>
+                    <td class="text-right">Price</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="p in products">
+                    <td>{{p.name}}</td>
+                    <td>{{p.category}}</td>
+                    <td>{{p.expiry}}</td>
+                    <td class="text-right">{{p.price | currency: '￥'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

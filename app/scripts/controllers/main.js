@@ -7,45 +7,17 @@
  * # MainCtrl
  * Controller of the exampleApp
  */
-var app = angular.module("exampleApp", []);
-
-app.controller("topLevelCtrl", function ($scope) {
-	$scope.data = {
-		dataValue: "Hello, Adam"
-	}
-
-	$scope.reverseText = function () {
-		$scope.data.dataValue = $scope.data.dataValue.split("").reverse().join("");
-	}
-
-	$scope.changeCase = function() {
-		var result = [];
-		angular.forEach($scope.data.dataValue.split(""), function (char, index) {
-			result.push(index % 2 == 1 ? char.toString().toUpperCase() : char.toString().toLowerCase());
-		});
-
-		$scope.dataValue = result.join("");
-	}
-});
-
-app.controller("firstChildCtrl", function ($scope) {
-
-	$scope.changeCase = function() {
-		$scope.data.dataValue = $scope.data.dataValue.toUpperCase();
-	};
-});
-
-app.controller("secondChildCtrl", function ($scope) {
-
-	$scope.changeCase = function () {
-		$scope.data.dataValue = $scope.data.dataValue.toLowerCase();
-	}
-
-	$scope.shiftFour = function () {
-		var result = [];
-		angular.forEach($scope.data.dataValue.split(""), function (char, index) {
-			result.push(index < 4 ? char.toUpperCase() : char);
-		});
-		$scope.data.dataValue = result.join("");
-	}
-})
+angular.module('exampleApp', [])
+	.controller('defaultCtrl', function ($scope) {
+		$scope.products = [
+			{ name: "Apples", category: "Fruit", price: 1.20, expiry: 10 },
+			{ name: "Bananas", category: "Fruit", price: 2.42, expiry: 7 },
+			{ name: "Pears", category: "Fruit", price: 2.02, expiry: 6 },
+			{ name: "Tuna", category: "Fish", price: 20.45, expiry: 3 },
+			{ name: "Salmon", category: "Fish", price: 17.93, expiry: 2 },
+			{ name: "Trout", category: "Fish", price: 12.93, expiry: 4 },
+			{ name: "Beer", category: "Drinks", price: 2.99, expiry: 365 },
+			{ name: "Wine", category: "Drinks", price: 8.99, expiry: 365 },
+			{ name: "Whiskey", category: "Drinks", price: 45.99, expiry: 365 }
+		];
+	})
