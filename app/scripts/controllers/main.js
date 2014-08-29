@@ -20,4 +20,9 @@ angular.module('exampleApp', [])
 			{ name: "Wine", category: "Drinks", price: 8.99, expiry: 365 },
 			{ name: "Whiskey", category: "Drinks", price: 45.99, expiry: 365 }
 		];
+
+		$scope.getExpiryDate = function (days) {
+			var now = new Date();
+			return now.setDate(now.getDate() + days);
+		}
 	})
