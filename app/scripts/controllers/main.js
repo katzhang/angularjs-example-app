@@ -11,14 +11,12 @@ angular.module('exampleApp', [])
 	.directive('unorderedList', function () {
 		return function (scope, element, attrs) {
 			var data = scope[attrs['unorderedList']];
-			var propertyExpression = attrs['listProperty'];
+			var propertyName = attrs['listProperty'];
 			if (angular.isArray(data)) {
 				var listElem = angular.element('<ul>');
 				element.append(listElem);
 				for (var i = 0; i < data.length; i++) {
-					var itemElement = angular.element('<li>')
-						.text(scope.$eval(propertyExpression, data[i]));
-					listElem.append(itemElement);
+					listElem.append(angular.element('<li>').text(data[i][propertyName]));
 				}
 			}
 		}
