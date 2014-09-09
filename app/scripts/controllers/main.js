@@ -9,16 +9,18 @@
  */
 
 angular.module('exampleApp', [])
-	.controller('defaultCtrl', function ($scope, $location, $anchorScroll) {
+	.controller('defaultCtrl', function ($scope, $exceptionHandler) {
 
-		$scope.itemCount = 50;
-		$scope.items = [];
-
-		for (var i = 0; i < $scope.itemCount; i++) {
-			$scope.items[i] = "Item " + i;
+		$scope.throwEx = function () {
+			try {
+				throw new Error("Triggered bia");
+			} catch (ex) {
+				$exceptionHandler(ex.message, "Button click");
+			}
 		}
-
-		$scope.show = function (id) {
-			$location.hash(id);
+	})
+	.factory('$exceptionHandler', function ($log) {
+		return function (exception, cause) {
+			$log.error('Message: ' + exception.message + ' (Cause: ' + cause + ')');
 		}
 	})
