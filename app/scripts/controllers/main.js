@@ -9,18 +9,23 @@
  */
 
 angular.module('exampleApp', [])
-	.controller('defaultCtrl', function ($scope, $exceptionHandler) {
+	.controller('defaultCtrl', function ($scope) {
 
-		$scope.throwEx = function () {
-			try {
-				throw new Error("Triggered bia");
-			} catch (ex) {
-				$exceptionHandler(ex.message, "Button click");
-			}
-		}
+		$scope.price = "100.23";
 	})
-	.factory('$exceptionHandler', function ($log) {
-		return function (exception, cause) {
-			$log.error('Message: ' + exception.message + ' (Cause: ' + cause + ')');
+	.directive('evalExpression', function ($parse) {
+		return function(scope, element, attrs) {
+			scope.$watch(attrs['evalExpression'], function (newValue) {
+				try {
+					var expressionFn = $parse(scope.expr);
+					var result = expressionFn(scope);
+					if (result == undefined) {
+						result = "no result";
+					}
+				} catch(err) {
+					result = "cannot evaluate expression";
+				}
+				element.text(result);
+			})
 		}
 	})
